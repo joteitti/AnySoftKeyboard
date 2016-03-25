@@ -129,7 +129,7 @@ android {
     }
 }
 
-task jacocoTestReport(type: JacocoReport, dependsOn: "testDebug") {
+task jacocoTestReport(type: JacocoReport/*make sure you are running testDebug prior to calling this task*/) {
     group = "Reporting"
     description = "Generate Jacoco coverage reports after running tests."
     reports {
