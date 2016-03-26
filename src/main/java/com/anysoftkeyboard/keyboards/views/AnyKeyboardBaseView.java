@@ -1430,6 +1430,24 @@ public class AnyKeyboardBaseView extends View implements
             canvas.drawRect(0, 0, getWidth(), getHeight(), paint);
         }
 
+        if (true) {
+            for (int i = 0; i < mPointerTrackers.size(); ++i) {
+                PointerTracker tracker = mPointerTrackers.get(i);
+                if (tracker.hasValidKeyIndex()) {
+                    int lastX = tracker.getLastX();
+                    int lastY = tracker.getLastY();
+                    int offsetX = mKeyDetector.getTouchOffsetX(lastX, lastY);
+                    int offsetY = mKeyDetector.getTouchOffsetX(lastX, lastY);
+                    paint.setAlpha(128);
+                    paint.setColor(0xFFFF0000);
+                    canvas.drawCircle(lastX, lastY, 5, paint);
+                    paint.setColor(0xFFFFFF00);
+                    paint.setStrokeWidth(3.0f);
+                    canvas.drawLine(lastX, lastY, lastX + offsetX, lastY + offsetY, paint);
+                }
+            }
+        }
+
         /**code to show touch points
          if (FeaturesSet.DEBUG_LOG) {
          for (PointerTracker tracker : mPointerTrackers) {

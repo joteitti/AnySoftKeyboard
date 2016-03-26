@@ -377,6 +377,10 @@ public class PointerTracker {
         return mKeyState.getLastY();
     }
 
+    public boolean hasValidKeyIndex() {
+        return mKeyState.getKeyIndex() != NOT_A_KEY || mPreviousKey != NOT_A_KEY;
+    }
+
     private boolean isMinorMoveBounce(int x, int y, int newKey) {
         if (mKeys == null || mKeyHysteresisDistanceSquared < 0)
             throw new IllegalStateException("keyboard and/or hysteresis not set");

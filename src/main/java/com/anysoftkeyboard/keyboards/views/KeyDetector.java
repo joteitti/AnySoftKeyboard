@@ -18,6 +18,8 @@ package com.anysoftkeyboard.keyboards.views;
 
 import com.anysoftkeyboard.keyboards.Keyboard;
 import com.anysoftkeyboard.keyboards.Keyboard.Key;
+import com.anysoftkeyboard.touchmodels.GPOffsetModel;
+import com.anysoftkeyboard.touchmodels.TouchOffsetModel;
 
 import java.util.Arrays;
 import java.util.List;
@@ -35,8 +37,11 @@ abstract class KeyDetector {
 
     protected int mProximityThresholdSquare;
 
+    protected TouchOffsetModel mTouchOffsetModel;
+
     protected KeyDetector() {
         mNearByCodes = new int[getMaxNearbyKeys()];
+        mTouchOffsetModel = createTouchOffsetModel();
     }
 
     public Key[] setKeyboard(Keyboard keyboard) {
@@ -52,12 +57,22 @@ abstract class KeyDetector {
         mCorrectionY = (int) correctionY;
     }
 
+    public int getTouchOffsetX(int x, int y) {
+        if (mTouchOffsetModel == null) return 0;
+        return mTouchOffsetModel.getOffsetX(x + mCorrectionX, y + mCorrectionY);
+    }
+
+    public int getTouchOffsetY(int x, int y) {
+        if (mTouchOffsetModel == null) return 0;
+        return mTouchOffsetModel.getOffsetY(x + mCorrectionX, y + mCorrectionY);
+    }
+
     protected int getTouchX(int x, int y) {
-        return x + mCorrectionX;
+        return x + mCorrectionX + getTouchOffsetX(x, y);
     }
 
     protected int getTouchY(int x, int y) {
-        return y + mCorrectionY;
+        return y + mCorrectionY + getTouchOffsetY(x, y);
     }
 
     protected Key[] getKeys() {
@@ -65,6 +80,10 @@ abstract class KeyDetector {
             throw new IllegalStateException("keyboard isn't set");
         // mKeyboard is guaranteed not to be null at setKeybaord() method if mKeys is not null
         return mKeys;
+    }
+
+    protected TouchOffsetModel createTouchOffsetModel() {
+        return new GPOffsetModel();
     }
 
     public void setProximityCorrectionEnabled(boolean enabled) {
