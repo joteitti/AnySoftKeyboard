@@ -190,6 +190,7 @@ dependencies {
     compile "com.android.support:palette-v7:$supportLibVersion"
     compile 'com.github.menny.Chauffeur:permissions:37ea0668afc7a63c6ea36f318741fb291fb2a20c'
     compile fileTree(dir: 'libs', include: '*.jar')
+    compile group: 'org.ejml', name: 'all', version: '0.29'
 
     testCompile 'junit:junit:4.12'
     testCompile 'org.robolectric:robolectric:3.0'
