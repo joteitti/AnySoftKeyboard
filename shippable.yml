@@ -10,11 +10,14 @@ build:
     pull: true
   env:
     global:
-    - secure: KDs/slK8Wd05ulx6mZ4of8zQny1gzlcxZdP3Sft/uiwtvFGvk7N3k66D9WjVrfvNzO6NLrolVeCvwWQd/EX1PwqKXO3KVvVvzwORnYLvkDBQUu8t1igFaCSDZaW8Ua0bFi7IvUuVpv6h5X+y8qvxjbKmdUvTbxHwPp8DWlcjSjFOgSvF3V+sk6ioHwnLqnlDVlO88uhMJBfUX2aOD9JHvkR673PTpRRNfWbG83M49CeUkc9Dei2loFiBCWLkchF1hOsII6AB4ZVvSov4OwLzSdomVPTh/b1qjSZMs+gCAMLNS/zfNVeUhlKRnn0BjiDu1/jgLg19UuKiiZYo4CaReE482CRPF/Sd9z00tTWHw/cHJNHlICCfUjsuHODSfP8WB8sdXPnDOM0rcGN8tcbStfrtzKHDRgQynKZaXY63/yxl7gYsfdF24kOL5DA0h40FY0aZBLeG4AWxq1t4yVsYf0eg31qDHKXh54g/m9R/VmpOyI5rq4xKSrvcf3X4urLgklTZ/Vxj5VQ+HXWuEBWwhV+HRCH1gCff0vypuN8EYMEk2SFmY/mGymY3js4EcuU7O3T24MF/nmM5ADJxi3kZT+7R5bRXGugOsADpODzhdYHF7ndGB1xfmSmrFrIwwffqSTqbKXYNGE3ofGL+YiOQiwoEDLlkT7U+Ma1elHY3hl4=
+    - MY_TEST_ENV_VAL="TestWorked"
+    - secure: AAM8atSJwUAt5lXGUoepcT6/+xoX8NzHs88goeBJrc3S9+Pow6pxDPx0ySQeZsat2ZBskXidEdlb37WoQn2cKU1BfYoU/aCPKxezBI827ivtsPunyQtrWS6UHQdLfj83aU2Sg3uS3aZa9hzenJbxipfUVPutW+sqd0OP5YE4YZlCGmYlrOwXNWze+We+1E4jO6DQPBuXWlHD6v6eAo8gBYtejc8gex62vYfy/O4JFCRMoaJWEw+l8/lXt/jv0p0pvbfax9oltZmtGNGUKyebw4RbFSUbytdYWvRcxPnZ1kTXuLNLiXiUs8pETXj+W2tdn3ptkThD8z4JKtS4BG6daVrpE0VeC5Pn8q2i6SKtoh3/73IGpo5N3PjgOW+u0Bk0EUVRZhQmJG20At6vqPO3a+ErsthJNU+OGgBmi1GpeV3pHcERzgTK6xrPRegWPl7wPZHSxak4u4POrFJml8S3MdB7tfmQBziwtM6Q5Kb1CXbI827miHO5MvYCm40rfI9SL8XA6eXZtHLcldRUVb1AxRFENdg7WZbDPqtRusE352lRQmdCwVGg+UI3/WYW69THdvDPTyK62s++XxbHQJLZ0Gg1JnbfBm7+kC8g+y1zt+AJZwR9F5EWfniY0PlxjY8eNlzC2+YRxdqa90EomUKcsMECtztRYa13vQBfYzlVpew=
   ci:
     - mkdir -p shippable/testresults
     - mkdir -p shippable/codecoverage
-    - ./download_signing_files.sh $ANYSOFTKEYBOARD_KEYSTORE_ALIAS
+    - echo "ALIAS $ANYSOFTKEYBOARD_KEYSTORE_ALIAS"
+    - echo "Test $MY_TEST_ENV_VAL"
+    - ./download_signing_files.sh $ANYSOFTKEYBOARD_KEYSTORE_ALIAS $MY_TEST_ENV_VAL
     - ./gradlew clean testDebug checkDebug
     - ./gradlew jacocoTestReport
     - cp -r build/test-results/* shippable/testresults/
