@@ -14,7 +14,7 @@ build:
   ci:
     - mkdir -p shippable/testresults
     - mkdir -p shippable/codecoverage
-    - ./download_signing_files.sh
+    - ./download_signing_files.sh $ANYSOFTKEYBOARD_KEYSTORE_ALIAS
     - ./gradlew clean testDebug checkDebug
     - ./gradlew jacocoTestReport
     - cp -r build/test-results/* shippable/testresults/
