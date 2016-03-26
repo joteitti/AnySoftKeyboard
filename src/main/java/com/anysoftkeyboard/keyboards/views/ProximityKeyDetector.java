@@ -35,8 +35,8 @@ class ProximityKeyDetector extends KeyDetector {
     @Override
     public int getKeyIndexAndNearbyCodes(int x, int y, int[] allKeys) {
         final Key[] keys = getKeys();
-        final int touchX = getTouchX(x);
-        final int touchY = getTouchY(y);
+        final int touchX = getTouchX(x, y);
+        final int touchY = getTouchY(x, y);
         int primaryIndex = AnyKeyboardBaseView.NOT_A_KEY;
         int closestKey = AnyKeyboardBaseView.NOT_A_KEY;
         int closestKeyDist = mProximityThresholdSquare + 1;

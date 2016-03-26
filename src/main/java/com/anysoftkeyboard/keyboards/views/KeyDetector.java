@@ -29,7 +29,6 @@ abstract class KeyDetector {
     private Key[] mKeys;
 
     protected int mCorrectionX;
-
     protected int mCorrectionY;
 
     protected boolean mProximityCorrectOn;
@@ -53,11 +52,11 @@ abstract class KeyDetector {
         mCorrectionY = (int) correctionY;
     }
 
-    protected int getTouchX(int x) {
+    protected int getTouchX(int x, int y) {
         return x + mCorrectionX;
     }
 
-    protected int getTouchY(int y) {
+    protected int getTouchY(int x, int y) {
         return y + mCorrectionY;
     }
 
